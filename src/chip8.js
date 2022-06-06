@@ -10,7 +10,7 @@ export class Chip8 {
   delayTimer;
   soundTimer;
   drawFlag;
-  stack = new Uint16Array(16);
+  stack = [];
   stackPointer;
   keypad = new Uint8Array(16);
 
@@ -40,11 +40,19 @@ export class Chip8 {
 
     switch (opcode & 0xf000) {
       case 0x0:
+        if (opcode === 0x00ee) {
+          this.pc = this.stack.pop();
+        }
         console.log("Clear display");
         this.display.fill(0);
         break;
       case 0x1000:
         console.log("Jump to " + NNN);
+        this.pc = NNN;
+        break;
+
+      case 0x2000:
+        this.stack.push(this.pc);
         this.pc = NNN;
         break;
 
