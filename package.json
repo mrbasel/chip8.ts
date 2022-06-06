@@ -1,0 +1,25 @@
+{
+  "name": "chip8-vm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrbasel/chip8-vm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrbasel/chip8-vm/issues"
+  },
+  "homepage": "https://github.com/mrbasel/chip8-vm#readme",
+  "dependencies": {
+    "@kmamal/sdl": "^0.3.5",
+    "canvas": "^2.9.1"
+  }
+}
