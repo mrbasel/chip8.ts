@@ -70,6 +70,89 @@ export class Chip8 {
         this.indexReg = NNN;
         break;
 
+      case 0x3000:
+        if (this.registers[X] === NN) this.pc += 2;
+        break;
+
+      case 0x4000:
+        if (this.registers[X] !== NN) this.pc += 2;
+        break;
+
+      case 0x5000:
+        if (this.registers[X] === this.registers[Y]) this.pc += 2;
+        break;
+
+      case 0x9000:
+        if (this.registers[X] !== this.registers[Y]) this.pc += 2;
+        break;
+
+      // Logical and arithmetic instructions
+      case 0x8000:
+        switch (N) {
+          case 0:
+            this.registers[X] = this.registers[Y];
+            break;
+
+          case 1:
+            this.registers[X] |= this.registers[Y];
+            break;
+
+          case 2:
+            this.registers[X] &= this.registers[Y];
+            break;
+
+          case 3:
+            this.registers[X] ^= this.registers[Y];
+            break;
+
+          case 4:
+            if (this.registers[X] + this.registers[Y] > 255)
+              this.registers[0xf] = 1;
+            else this.registers[0xf] = 0;
+
+            this.registers[X] += this.registers[Y];
+            break;
+
+          case 5:
+            this.registers[0xf] = 1;
+            if (this.registers[X] - this.registers[Y] < 0)
+              this.registers[0xf] = 0;
+            this.registers[X] -= this.registers[Y];
+            break;
+
+          case 7:
+            this.registers[0xf] = 1;
+            if (this.registers[Y] - this.registers[X] < 0)
+              this.registers[0xf] = 0;
+            this.registers[Y] -= this.registers[X];
+            break;
+
+          case 6:
+            this.registers[X] = this.registers[Y];
+            this.registers[0xf] = this.registers[X] & 0x000f;
+            this.registers[X] = this.registers[X] >> 1;
+            break;
+
+          case 0xe:
+            this.registers[X] = this.registers[Y];
+            this.registers[0xf] = (this.registers[X] & 0xf000) >> 12;
+            this.registers[X] = this.registers[X] << 1;
+            break;
+
+          default:
+            break;
+        }
+
+        break;
+
+      case 0xb000:
+        this.pc = NNN + this.registers[X];
+        break;
+
+      case 0xc000:
+        this.registers[X] = (Math.random() * 256) & NN;
+        break;
+
       case 0xd000:
         let [xCord, yCord] = [this.registers[X], this.registers[Y]];
         if (xCord > 64) xCord = xCord - 64;
