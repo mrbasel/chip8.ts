@@ -42,9 +42,10 @@ export class Chip8 {
       case 0x0:
         if (opcode === 0x00ee) {
           this.pc = this.stack.pop();
+        } else {
+          console.log("Clear display");
+          this.display.fill(0);
         }
-        console.log("Clear display");
-        this.display.fill(0);
         break;
       case 0x1000:
         console.log("Jump to " + NNN);
