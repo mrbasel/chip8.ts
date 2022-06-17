@@ -154,6 +154,71 @@ export class Chip8 {
         this.registers[X] = (Math.random() * 256) & NN;
         break;
 
+      case 0xe000:
+        switch (NN) {
+          case 0x9e:
+            if (this.keypad[this.registers[X]] === 1) this.pc += 2;
+            break;
+          case 0xa1:
+            if (this.keypad[this.registers[X]] !== 1) this.pc += 2;
+            break;
+        }
+        break;
+
+      case 0xf000:
+        switch (NN) {
+          case 0x07:
+            this.registers[X] = this.delayTimer;
+            break;
+          case 0x15:
+            this.delayTimer = this.registers[X];
+            break;
+          case 0x18:
+            this.soundTimer = this.registers[X];
+            break;
+
+          case 0x1e:
+            this.indexReg += this.registers[X];
+            break;
+
+          case 0x0a:
+            const pressedKeyIndex = this.keypad.findIndex((key) => key === 1);
+            const pressedKey = this.keypad[pressedKeyIndex];
+
+            if (!pressedKey) this.pc -= 2;
+            else this.registers[X] = pressedKeyIndex;
+
+            break;
+
+          case 0x29:
+            this.indexReg = this.registers[X] * 5;
+            break;
+
+          // TODO: Implement BCD instruction
+          case 0x33:
+            break;
+
+          case 0x55:
+            if (X === 0) this.memory[this.indexReg] = this.registers[X];
+            else {
+              for (let i = 0; i <= X; i++) {
+                this.memory[this.indexReg + i] = this.registers[i];
+              }
+            }
+            break;
+
+          case 0x65:
+            if (X === 0) this.registers[X] = this.memory[this.indexReg];
+            else {
+              for (let i = 0; i <= X; i++) {
+                this.registers[i] = this.memory[this.indexReg + i];
+              }
+            }
+            break;
+        }
+
+        break;
+
       case 0xd000:
         let [xCord, yCord] = [this.registers[X], this.registers[Y]];
         if (xCord > 64) xCord = xCord - 64;
@@ -178,6 +243,7 @@ export class Chip8 {
         break;
 
       default:
+        console.error("Unhandled intruction " + opcode.toString(16));
         break;
     }
   }
