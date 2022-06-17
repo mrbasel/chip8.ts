@@ -196,6 +196,19 @@ export class Chip8 {
 
           // TODO: Implement BCD instruction
           case 0x33:
+            let targetNumber = this.registers[X];
+            const bcdNumber = Array(3).fill(0);
+
+            let i = 2;
+            while (targetNumber > 0) {
+              bcdNumber[i] = targetNumber % 10;
+              targetNumber = Math.floor(targetNumber / 10)
+              i--;
+            }
+            this.memory[this.indexReg] = bcdNumber[0];
+            this.memory[this.indexReg + 1] = bcdNumber[1];
+            this.memory[this.indexReg + 2] = bcdNumber[2];
+
             break;
 
           case 0x55:
