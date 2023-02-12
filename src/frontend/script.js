@@ -28,6 +28,7 @@ const gameLoop = (emulator) => {
     if (emulator.drawFlag) {
         drawDisplay(emulator.display);
     }
+    window.requestAnimationFrame(() => gameLoop(emulator));
 }
 
 function readFile(fileInput, callback) {
@@ -47,6 +48,6 @@ document.querySelector('button').addEventListener('click', () => {
     readFile(fileInput, (view) => {
         const emulator = new Chip8(view);
 
-        setInterval(() => gameLoop(emulator), 1000 / 60);
+        window.requestAnimationFrame(() => gameLoop(emulator));
     })
 })
