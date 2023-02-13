@@ -129,14 +129,14 @@ export class Chip8 {
             break;
 
           case 6:
-            this.registers[X] = this.registers[Y];
-            this.registers[0xf] = this.registers[X] & 0x000f;
+            // this.registers[X] = this.registers[Y];
+            this.registers[0xf] = this.registers[X] & 0x01;
             this.registers[X] = this.registers[X] >> 1;
             break;
 
           case 0xe:
-            this.registers[X] = this.registers[Y];
-            this.registers[0xf] = (this.registers[X] & 0xf000) >> 12;
+            // this.registers[X] = this.registers[Y];
+            this.registers[0xf] = (this.registers[X] & 0x80) >> 7;
             this.registers[X] = this.registers[X] << 1;
             break;
 
