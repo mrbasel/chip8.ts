@@ -38,6 +38,10 @@ export class Chip8 {
 
     this.drawFlag = false;
 
+    // decrement timers
+    if (this.delayTimer > 0) this.delayTimer--;
+    if (this.soundTimer > 0) this.soundTimer--;
+
     switch (opcode & 0xf000) {
       case 0x0:
         if (opcode === 0x00ee) {
@@ -71,6 +75,7 @@ export class Chip8 {
         this.indexReg = NNN;
         break;
 
+      // Skip instructions
       case 0x3000:
         if (this.registers[X] === NN) this.pc += 2;
         break;
@@ -147,7 +152,7 @@ export class Chip8 {
         break;
 
       case 0xb000:
-        this.pc = NNN + this.registers[X];
+        this.pc = NNN + this.registers[0x0];
         break;
 
       case 0xc000:
@@ -194,7 +199,6 @@ export class Chip8 {
             this.indexReg = this.registers[X] * 5;
             break;
 
-          // TODO: Implement BCD instruction
           case 0x33:
             let targetNumber = this.registers[X];
             const bcdNumber = Array(3).fill(0);
