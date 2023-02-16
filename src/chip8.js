@@ -121,9 +121,9 @@ export class Chip8 {
 
           case 5:
             this.registers[0xf] = 1;
-            if (this.registers[X] - this.registers[Y] < 0)
+            if (this.registers[Y] > this.registers[X])
               this.registers[0xf] = 0;
-            this.registers[X] -= this.registers[Y];
+            this.registers[X] = this.registers[X] - this.registers[Y];
             break;
 
           case 7:
