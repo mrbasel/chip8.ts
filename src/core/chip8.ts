@@ -7,14 +7,13 @@ export class Chip8 {
   display = new Uint8Array(64 * 32);
   pc = 0x200;
   indexReg = 0;
-  delayTimer;
-  soundTimer;
-  drawFlag;
-  stack = [];
-  stackPointer;
+  delayTimer: number;
+  soundTimer: number;
+  drawFlag: boolean;
+  stack: number[] = [];
   keypad = new Uint8Array(16);
 
-  constructor(programArray) {
+  constructor(programArray: Uint8Array) {
     fontset.forEach((elem, i) => {
       this.memory[i] = elem;
     });
@@ -45,7 +44,7 @@ export class Chip8 {
     switch (opcode & 0xf000) {
       case 0x0:
         if (opcode === 0x00ee) {
-          this.pc = this.stack.pop();
+          this.pc = this.stack.pop() as number;
         } else {
           console.log("Clear display");
           this.display.fill(0);

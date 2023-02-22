@@ -1,11 +1,12 @@
 {
   "name": "chip8-vm",
-  "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./build.sh && esbuild src/web/main.ts --bundle --outfile=dist/main.js",
+    "dev": "npm run build && esbuild src/web/main.ts --bundle --outdir=dist --servedir=dist"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/mrbasel/chip8-vm#readme",
   "dependencies": {
     "@kmamal/sdl": "^0.3.5",
-    "canvas": "^2.9.1"
+    "canvas": "^2.9.1",
+    "esbuild": "0.17.8"
   }
 }

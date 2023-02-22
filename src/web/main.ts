@@ -1,4 +1,4 @@
-import { Chip8 } from "../chip8.js";
+import { Chip8 } from "../core/chip8.js";
 
 const keys = [
     '1', '2', '3', '4',
@@ -7,13 +7,16 @@ const keys = [
     'Z', 'X', 'C', 'V'
 ]
 
+console.log('!!')
 const fileInput = document.querySelector('input');
 const onColor = "rgb(255, 255, 255)";
 const offColor = "rgb(0, 0, 0)";
 
-function drawDisplay(pixels) {
-    const canvas = document.querySelector(".canvas");
-    const ctx = canvas.getContext("2d");
+function drawDisplay(pixels: Uint8Array) {
+    const canvas = document.querySelector<HTMLCanvasElement>("canvas");
+    const ctx = canvas?.getContext("2d");
+
+    if (!ctx) throw new Error("No canvas element");
 
     for (let j = 0; j < 31; j++) {
         for (let i = 0; i < 64; i++) {
@@ -29,7 +32,7 @@ function drawDisplay(pixels) {
     }
 }
 
-const gameLoop = (emulator) => {
+const gameLoop = (emulator: Chip8) => {
     emulator.emulateCycle();
 
     if (emulator.drawFlag) {
@@ -38,8 +41,9 @@ const gameLoop = (emulator) => {
     setTimeout(() => gameLoop(emulator), 5)
 }
 
-function readFile(fileInput, callback) {
-    const file = fileInput.files[0];
+function readFile(fileInput: HTMLInputElement, callback: (view: Uint8Array) => void) {
+    const file = fileInput?.files?.[0];
+    if (!file) return;
 
     const reader = new FileReader();
     reader.readAsArrayBuffer(file);
@@ -50,8 +54,8 @@ function readFile(fileInput, callback) {
     }
 }
 
-document.querySelector('button').addEventListener('click', () => {
-    readFile(fileInput, (view) => {
+document.querySelector('button')?.addEventListener('click', () => {
+    readFile(fileInput, (view: Uint8Array) => {
         const emulator = new Chip8(view);
 
         document.addEventListener('keydown', (e) => {
@@ -63,9 +67,9 @@ document.querySelector('button').addEventListener('click', () => {
         })
 
         const keypad = document.querySelector('#keypad')
-        keypad.childNodes.forEach((button) => {
+        keypad?.childNodes.forEach((button) => {
             button.addEventListener('click', () => {
-                const key = parseInt(button.textContent, 16);
+                const key = parseInt(button.textContent as string, 16);
                 emulator.keypad[key] = 1;
 
                 // Temporary hack :/
