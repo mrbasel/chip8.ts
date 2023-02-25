@@ -7,13 +7,12 @@ const keys = [
     'Z', 'X', 'C', 'V'
 ]
 
-console.log('!!')
 const fileInput = document.querySelector('input');
 const onColor = "rgb(255, 255, 255)";
 const offColor = "rgb(0, 0, 0)";
+const canvas = document.querySelector<HTMLCanvasElement>("canvas");
 
 function drawDisplay(pixels: Uint8Array) {
-    const canvas = document.querySelector<HTMLCanvasElement>("canvas");
     const ctx = canvas?.getContext("2d");
 
     if (!ctx) throw new Error("No canvas element");
@@ -38,7 +37,16 @@ const gameLoop = (emulator: Chip8) => {
     if (emulator.drawFlag) {
         drawDisplay(emulator.display);
     }
-    setTimeout(() => gameLoop(emulator), 5)
+
+    const cpuInfo = document.querySelector('cpu-info');
+    cpuInfo?.setAttribute('pc', emulator.pc.toString(16));
+    cpuInfo?.setAttribute('I', emulator.indexReg.toString(16));
+    cpuInfo?.setAttribute('registers', JSON.stringify(emulator.registers));
+    // cpuInfo.registers = emulator.registers;
+
+    setTimeout(() => {
+        gameLoop(emulator);
+    }, 5)
 }
 
 function readFile(fileInput: HTMLInputElement, callback: (view: Uint8Array) => void) {

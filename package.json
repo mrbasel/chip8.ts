@@ -4,8 +4,8 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "build": "./build.sh && esbuild src/web/main.ts --bundle --outfile=dist/main.js",
-    "dev": "npm run build && esbuild src/web/main.ts --bundle --outdir=dist --servedir=dist",
+    "build": "./build.sh && esbuild src/web/index.ts --bundle --outfile=dist/main.js",
+    "dev": "npm run build && esbuild src/web/index.ts --bundle --outdir=dist --servedir=dist",
     "test": "jest"
   },
   "repository": {
@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/mrbasel/chip8-vm#readme",
   "dependencies": {
-    "esbuild": "0.17.8"
+    "esbuild": "0.17.8",
+    "lit": "^2.6.1",
+    "nes.css": "^2.3.0"
   },
   "devDependencies": {
     "jest": "^29.4.3"

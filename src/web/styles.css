@@ -5,16 +5,32 @@ body {
     color: #fff;
 }
 
+main {
+    display: flex;
+    margin-top: 3rem;
+    gap: 2rem;
+}
+
+main section {
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    border: 1px solid #333;
+    padding: .25rem;
+}
+
 .canvas {
-    border: 1px solid rgb(37, 37, 153);
+    border: 1px solid #333;
 }
 
 #keypad {
-    width: 25%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 5px;
 }
 
 #keypad button {
+    padding: 1rem .5rem;
 }
