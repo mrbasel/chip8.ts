@@ -41,8 +41,9 @@ const gameLoop = (emulator: Chip8) => {
     const cpuInfo = document.querySelector('cpu-info');
     cpuInfo?.setAttribute('pc', emulator.pc.toString(16));
     cpuInfo?.setAttribute('I', emulator.indexReg.toString(16));
-    cpuInfo?.setAttribute('registers', JSON.stringify(emulator.registers));
-    // cpuInfo.registers = emulator.registers;
+    
+    // TODO: Fix type error  
+    cpuInfo.registers = Array.from(emulator.registers);
 
     setTimeout(() => {
         gameLoop(emulator);

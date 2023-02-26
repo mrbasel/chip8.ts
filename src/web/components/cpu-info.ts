@@ -5,7 +5,7 @@ import { customElement, property } from 'lit/decorators.js';
 @customElement('cpu-info')
 export class CpuInfo extends LitElement {
   static styles = css`
-    table, td { 
+    td { 
       border: 1px solid #333;
     }
     td {
@@ -23,8 +23,8 @@ export class CpuInfo extends LitElement {
   @property()
   I: string = '0';
 
-  @property()
-  registers: string[] = [];
+  @property({ type: Array })
+  registers: number[] = Array.from({ length: 16 }, () => 0);
 
   render() {
     return html`
@@ -41,13 +41,11 @@ export class CpuInfo extends LitElement {
         <tr class='title'>
           <td colspan='4'>Registers</td>
         </tr>
-  ${Array.from({ length: 8 }, (_, i) => i)
-        .map((i) => html`
+  ${this.registers
+        .map((v, i) => html`
         <tr>
-          <td>V${i.toString().toUpperCase()}</td>
-          <td>0</td>
-          <td>V${(i + 1).toString().toUpperCase()}</td>
-          <td>0</td>
+          <td>V${i + 1}</td>
+          <td>${v.toString(16).toUpperCase()}</td>
         </tr>`
         )}
         </tbody>
