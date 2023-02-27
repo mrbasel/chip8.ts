@@ -45,6 +45,8 @@ const gameLoop = (emulator: Chip8) => {
     // TODO: Fix type error  
     cpuInfo.registers = Array.from(emulator.registers);
 
+    cpuInfo.stack = emulator.stack;
+
     setTimeout(() => {
         gameLoop(emulator);
     }, 5)
