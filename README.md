@@ -1,1 +1,3 @@
-# chip8-vm
+# Chip8.ts
+
+WIP..
