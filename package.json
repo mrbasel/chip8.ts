@@ -6,7 +6,7 @@
   "scripts": {
     "build": "vite build src/web/ --outDir ../../dist --emptyOutDir",
     "dev": "vite src/web/ --port 5000",
-    "test": "jest"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
-    "jest": "^29.4.3"
+    "vitest": "^0.29.2"
   }
 }

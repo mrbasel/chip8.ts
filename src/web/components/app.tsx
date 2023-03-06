@@ -16,10 +16,6 @@ const gameLoop = (emulator: Chip8, func?: any) => {
 
     if (func) func();
 
-    if (emulator.drawFlag) {
-        // drawDisplay(emulator.display);
-    }
-
     setTimeout(() => {
         gameLoop(emulator, func);
     }, 5)

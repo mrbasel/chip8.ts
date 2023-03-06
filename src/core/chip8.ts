@@ -51,6 +51,10 @@ export class Chip8 {
     return this._display;
   }
 
+  writeMemory(address: number, value: number) {
+    this._memory[address] = value;
+  }
+
   emulateCycle() {
     // Fetch opcode
     const opcode = (this._memory[this.pc] << 8) | this._memory[this.pc + 1];
