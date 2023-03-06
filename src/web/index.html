@@ -7,54 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
   <script src="index.ts" type="module" async></script>
+  <script src="./components/main.tsx" type="module" async></script>
   <title>Chip 8 emulator</title>
 </head>
 
 <body>
-  <header>
-    <h1>Chip-8 emulator!</h1>
-    <label for="rom">Upload rom</label>
-    <input id="rom" type="file" />
-    <button>Run</button>
-  </header>
-  <main>
-    <section>
-      <div>
-        <header>Display</header>
-        <canvas class="canvas box" width="640" height="310"></canvas>
-      </div>
-      <div>
-        <header>Keypad</header>
-        <div class="box" id='keypad'>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>C</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>D</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>E</button>
-          <button>A</button>
-          <button>0</button>
-          <button>B</button>
-          <button>F</button>
-        </div>
-      </div>
-
-    </section>
-
-    <section>
-        <header>CPU</header>
-        <div>
-          <cpu-info></cpu-info>
-        </div>
-    </section>
-  </main>
-
+  <div id="app"></div>
 </body>
 
 </html>

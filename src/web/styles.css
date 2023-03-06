@@ -34,3 +34,14 @@ main section {
 #keypad button {
     padding: 1rem .5rem;
 }
+
+td {
+    border: 1px solid #333;
+    padding: 0.5rem 2rem;
+    min-width: 25px;
+    max-width: 50px;
+}
+
+.title {
+text-align: center;
+}

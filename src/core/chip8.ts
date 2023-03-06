@@ -13,14 +13,30 @@ export class Chip8 {
   stack: number[] = [];
   keypad = new Uint8Array(16);
 
-  constructor(programArray: Uint8Array) {
+  constructor() {
     fontset.forEach((elem, i) => {
       this._memory[i] = elem;
     });
+  }
 
+  loadProgram(programArray: Uint8Array) {
+    this.reset();
     for (let i = 0; i < this._memory.length; i++) {
       this._memory[512 + i] = programArray[i];
     }
+  }
+
+  reset() {
+    this._memory = new Uint8Array(4096);
+    this._registers = new Uint8Array(16);
+    this._display = new Uint8Array(64 * 32);
+    this.pc = 0x200;
+    this.indexReg = 0;
+    // this.delayTimer = 0;
+    // this.soundTimer = 0;
+    this.drawFlag = false;
+    this.stack = [];
+    this.keypad = new Uint8Array(16);
   }
 
   get memory() {
