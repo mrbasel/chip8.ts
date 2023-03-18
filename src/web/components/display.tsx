@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "preact/hooks";
+import { useEffect, useMemo, useRef } from "preact/hooks";
 
 interface DisplayProps {
     display: Uint8Array;
@@ -26,7 +26,7 @@ function drawDisplay(pixels: Uint8Array, canvasCtx: CanvasRenderingContext2D) {
 export function Display({ display, shouldDraw }: DisplayProps) {
     const canvasRef = useRef<HTMLCanvasElement>();
 
-    useMemo(() => {
+    useEffect(() => {
         if (canvasRef.current && shouldDraw) {
             const canvasCtx = canvasRef.current.getContext("2d");
             drawDisplay(display, canvasCtx);

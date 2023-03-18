@@ -1,15 +1,3 @@
-const mapRegisters = (registers: number[]) => {
-    return registers.reduce((acc, v, i) => {
-        if (i % 2 === 0) {
-            acc.push([v]);
-        } else {
-            acc[acc.length - 1].push(v);
-        }
-        return acc;
-    }, [] as number[][]);
-
-}
-
 interface CpuInfoProps {
     registers: number[];
     pc: number;
@@ -45,3 +33,17 @@ export function CpuInfo({ registers, pc, indexReg }: CpuInfoProps) {
         </table>
     )
 }
+
+const mapRegisters = (registers: number[]) => {
+    return registers.reduce((acc, v, i) => {
+        if (i % 2 === 0) {
+            acc.push([v]);
+        } else {
+            acc[acc.length - 1].push(v);
+        }
+        return acc;
+    }, [] as number[][]);
+
+}
+
+

@@ -38,10 +38,14 @@ main section {
 td {
     border: 1px solid #333;
     padding: 0.5rem 2rem;
-    min-width: 25px;
-    max-width: 50px;
+    min-width: 70px;
+    max-width: 90px
 }
 
 .title {
 text-align: center;
+}
+
+.pc {
+    font-weight: bold;
 }

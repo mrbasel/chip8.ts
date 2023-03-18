@@ -3,6 +3,7 @@ import { Keypad } from "./keypad";
 import { CpuInfo } from "./cpu-info";
 import { Chip8 } from "../../core/chip8";
 import { useState } from 'preact/hooks';
+import {Instructions} from "./instructions";
 
 const keys = [
     '1', '2', '3', '4',
@@ -95,6 +96,9 @@ export function App() {
                 <button onClick={handleRun}>Run</button>
             </header>
             <main>
+            <section>
+            <Instructions pc={emulator.pc} memory={emulator.memory}/>
+            </section>
                 <section>
                     <Display shouldDraw={emulatorState.drawFlag} display={emulatorState.display} />
                     <Keypad />
